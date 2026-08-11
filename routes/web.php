@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +29,14 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    // ── Phase 2: Categories, Locations, Suppliers (routes will be added here)
+    // ── Phase 2: Categories, Locations, Suppliers
+    Route::patch('categories/{category}/toggle-status', [CategoryController::class, 'toggleStatus'])->name('categories.toggle-status');
+    Route::resource('categories', CategoryController::class)->except(['create', 'show', 'edit']);
+
+    Route::resource('locations', LocationController::class)->except(['create', 'show', 'edit']);
+
+    Route::patch('suppliers/{supplier}/toggle-status', [SupplierController::class, 'toggleStatus'])->name('suppliers.toggle-status');
+    Route::resource('suppliers', SupplierController::class)->except(['create', 'show', 'edit']);
 
     // ── Phase 3: Products (routes will be added here)
 
@@ -45,3 +55,4 @@ Route::middleware(['auth'])->group(function () {
     // ── Phase 10: Users, Audit (routes will be added here)
 
 });
+
