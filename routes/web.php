@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::patch('suppliers/{supplier}/toggle-status', [SupplierController::class, 'toggleStatus'])->name('suppliers.toggle-status');
     Route::resource('suppliers', SupplierController::class)->except(['create', 'show', 'edit']);
+
+    // ── Phase 3: Products
+    Route::patch('products/{product}/toggle-status', [ProductController::class, 'toggleStatus'])->name('products.toggle-status');
+    Route::resource('products', ProductController::class);
+
 
     // ── Phase 3: Products (routes will be added here)
 

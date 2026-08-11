@@ -14,4 +14,12 @@ enum ProductStatus: string
             self::Inactive => 'Inactivo',
         };
     }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::Active => 'emerald',
+            self::Inactive => 'slate',
+        };
+    }
 }
